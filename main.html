@@ -1,0 +1,352 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body {background:rgb(90, 61, 78)}
+.tab {float:left; min-height: 50px; width:calc(20%); min-width:calc(20%); padding:5px 10px; background: rgba(255, 255, 255,0); background:transparent; text-align:center; font-weight:700;}
+.tab b {display:block; margin-bottom:5px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size:11px;}
+.tab .btn {display:table-cell; height:25px; opacity:0.2; width:25px; vertical-align:middle; border-radius:3px; color:white; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight:bold;}
+.tab .btn.actve {opacity:1;}
+.explanationbx {
+float:left;
+background-color:#0f0f25;
+padding:15px;
+width:96%;
+height:270px;
+margin-right:10px;
+margin-bottom:10px;
+}
+
+.characterbx {
+color: white;
+font-family: Century Gothic, Open Sans, Helvetica, Arial, sans-serif;
+font-size:11px;
+position:relative;
+width:135px;
+height:135px;
+float:left;
+background-color:white;
+margin-right:10px;
+margin-bottom:10px;
+border:0px dotted black;
+border-radius:5px;
+overflow:hidden;
+transition-duration:0.3s;
+text-align:left;
+}
+
+.namebx {
+position:absolute;
+bottom:0;
+width:100%;
+height: 35px;
+line-height: 1.2;
+padding: 4px 5%;
+background-color: rgba(96,63,95,0.8);
+color:lightgrey;
+transition-duration:0.5s;
+}
+
+.namebx b {
+display:block;
+color:white;
+}
+
+.characterbx:hover .namebx {
+opacity:0;
+height:0px;
+text-align:left;
+}
+
+.heartbx {
+position: absolute;
+top: 3px;
+right: 2px;
+z-index:6;
+pointer-events:none;
+}
+
+.starbx {
+position: absolute;
+top: 1px;
+right: 16px;
+z-index:6;
+pointer-events:none;
+}
+
+.descbx {
+opacity:0;
+position:absolute;
+left:0px;
+top:0px;
+background-color: rgba(96,63,95,0.8);
+width:113%;
+height:100%;
+padding:40px 24px 10px 10px;
+z-index:5;
+border-radius:5px;
+overflow-y:auto;
+overflow-x:hidden;
+word-break:break-word;
+transition-duration:0.6s;
+font-size:11px;
+}
+
+.characterbx:hover .descbx {
+padding:10px 24px 10px 10px;
+opacity:1;
+}
+
+.filter:first-of-type {margin-top:10px;}
+.filter {border-radius:5px; font-size:10px; border: 0px solid white; margin: 4px 2px 0px 0px; background-color:rgba(255,255,255,0.1); color:white;}
+
+#gender {}
+#gender .btn {border:0; padding:0; margin:7px 2px 0;}
+#gender #male {background:rgb(81, 185, 211);}
+#gender #female {background:rgb(255, 115, 115);}
+
+#tier .btn {width:22px; border:0; padding:0; margin:5px -2px 0; font-size: 21px; background:transparent;}
+#tier #tone {color:rgb(255, 97, 97);}
+#tier #ttwo {color:rgb(255, 186, 97);}
+#tier #tthree {color:rgb(174, 231, 121);}
+#tier #tfour {color:rgb(151, 216, 241);}
+#tier #tfive {color:rgb(230, 151, 241);}
+
+#haircolor .btn {border:0; padding:0; margin:2px; border-radius:3px; height:10px; width:20px;}
+#haircolor #hblonde {background-color:rgb(255, 221, 127)}
+#haircolor #horange {background-color:rgb(255, 167, 116)}
+#haircolor #hred {background-color:rgb(255, 116, 116)}
+#haircolor #hpink {background-color:rgb(255, 157, 222)}
+#haircolor #hpurple {background-color:rgb(227, 157, 255)}
+#haircolor #hlightblue {background-color:rgb(158, 225, 236)}
+#haircolor #hblue {background-color:rgb(118, 143, 255)}
+#haircolor #hlightgreen {background-color:rgb(165, 231, 159)}
+#haircolor #hgreen {background-color:rgb(92, 175, 143)}
+#haircolor #hbrown {background-color:rgb(211, 142, 114)}
+#haircolor #hblack {background-color:rgb(99, 95, 94)}
+#haircolor #hgray {background-color:rgb(202, 191, 188)}
+#haircolor #hwhite {background-color:rgb(255, 255, 255)}
+#filter {margin-top:40px; margin-bottom:40px;}
+
+#eyecolor .btn {border:0; padding:0; margin:2px; border-radius:3px; height:10px; width:20px;}
+#eyecolor #eyellow {background-color:rgb(255, 221, 127)}
+#eyecolor #eorange {background-color:rgb(255, 167, 116)}
+#eyecolor #ered {background-color:rgb(255, 116, 116)}
+#eyecolor #epink {background-color:rgb(255, 157, 222)}
+#eyecolor #epurple {background-color:rgb(227, 157, 255)}
+#eyecolor #elightblue {background-color:rgb(158, 225, 236)}
+#eyecolor #eblue {background-color:rgb(118, 143, 255)}
+#eyecolor #elightgreen {background-color:rgb(165, 231, 159)}
+#eyecolor #egreen {background-color:rgb(92, 175, 143)}
+#eyecolor #ebrown {background-color:rgb(211, 142, 114)}
+#eyecolor #eblack {background-color:rgb(99, 95, 94)}
+#eyecolor #egray {background-color:rgb(202, 191, 188)}
+#eyecolor #ewhite {background-color:rgb(255, 255, 255)}
+
+#height .btn {border:0; padding:0; margin:2px; background:transparent; color:white; font-size:20px;}
+</style>
+
+<div id="filter">
+
+<div class="tab" id="tier"><b>Tier</b>
+<button id="tone" class="btn">♥</button>
+<button id="ttwo" class="btn">♥</button>
+<button id="tthree" class="btn">♥</button>
+<button id="tfour" class="btn">♥</button>
+<button id="tfive" class="btn">♥</button>
+</div>
+
+<div class="tab" id="gender"><b>Gender</b>
+<button id="male" class="btn">♂</button>
+<button id="female" class="btn">♀</button>
+</div>
+
+<div class="tab" id="haircolor"><b>Hair Color</b>
+<button id="hblonde" class="btn"> </button>
+<button id="horange" class="btn"> </button>
+<button id="hred" class="btn"> </button>
+<button id="hpink" class="btn"> </button>
+<button id="hpurple" class="btn"> </button>
+<button id="hlightblue" class="btn"> </button>
+<button id="hblue" class="btn"> </button>
+<button id="hlightgreen" class="btn"> </button>
+<button id="hgreen" class="btn"> </button>
+<button id="hbrown" class="btn"> </button>
+<button id="hblack" class="btn"> </button>
+<button id="hgray" class="btn"> </button>
+<button id="hwhite" class="btn"> </button>
+</div>
+
+<div class="tab" id="eyecolor"><b>Eye Color</b>
+<button id="eyellow" class="btn"> </button>
+<button id="eorange" class="btn"> </button>
+<button id="ered" class="btn"> </button>
+<button id="epink" class="btn"> </button>
+<button id="epurple" class="btn"> </button>
+<button id="elightblue" class="btn"> </button>
+<button id="eblue" class="btn"> </button>
+<button id="elightgreen" class="btn"> </button>
+<button id="egreen" class="btn"> </button>
+<button id="ebrown" class="btn"> </button>
+<button id="eblack" class="btn"> </button>
+<button id="egray" class="btn"> </button>
+<button id="ewhite" class="btn"> </button>
+</div>
+
+<div class="tab" id="height"><b>Shorter/Taller Than Me?</b>
+<button id="shortest" class="btn">«</button>
+<button id="shorter" class="btn">‹</button>
+<button id="same" class="btn">=</button>
+<button id="taller" class="btn">›</button>
+<button id="tallest" class="btn">»</button>
+</div>
+<div style="clear:both;height:0;width:0;"></div>
+</div>
+
+<br/>
+
+<div class="characterbx entry tfive male hblack eblue shortest" style="background-image:url('https://i.imgur.com/3LfOkR2.jpg')">
+<div class="namebx"><b>Niju</b> (Balto II)</div>
+<div class="heartbx">💜</div>
+<div class="descbx"><b>2002</b><br><br>I always unironically wanted Aleu to stay with him because I thought he was such an appealing villain, lol. Thinking back... he really had some Basta (Inkheart) vibes</div>
+</div>
+
+<div class="characterbx entry tthree male hwhite eblack same" style="background-image:url('https://i.imgur.com/0Z9778M.jpg')">
+<div class="namebx"><b>Negaduck</b> (Darkwing Duck)</div>
+<div class="heartbx">💚</div>
+<div class="descbx"><b>2001</b><br><br>Of course I also fell for what was essentially the evil, violent version of Darkwing, though he never quite reached the same level as Darkwing himself</div>
+</div>
+
+<div class="characterbx entry ttwo male hwhite eblack same" style="background-image:url('https://i.imgur.com/4VTIZsb.jpg')">
+<div class="namebx"><b>Drake Mallard</b> (Darkwing Duck)</div>
+<div class="heartbx">💛</div>
+<div class="descbx"><b>2001</b><br><br>I was SO obsessed with this character and show... I always forced my elementary school playmates to turn off all the lights and close all the blinds and play Darkwing Duck with me and they actually let me</div>
+</div>
+
+<div class="characterbx entry tthree female hred eblue shortest" style="background-image:url('https://i.imgur.com/G2hvVOD.jpg')">
+<div class="namebx"><b>Rita</b> (Jungledyret Hugo)</div>
+<div class="heartbx">💚</div>
+<div class="descbx"><b>2001</b><br><br>Your honor I love her... funnily enough over time I ended up being a lot like her personality-wise and idk why. Some of the characters I like or liked are a lot like me personality-wise, I swear I'm not narcissistic</div>
+</div>
+
+<div class="characterbx entry tfive male hblonde eblue shorter" style="background-image:url('https://i.imgur.com/aQAbKRr.jpg')">
+<div class="namebx"><b>Draco Malfoy</b> (Harry Potter)</div>
+<div class="heartbx">💜</div>
+<div class="descbx"><b>2001</b><br><br>As an adult I have no idea how I ever had a crush on this pompous little bitch, it's actually a mystery to me how kids' brains work- Also, on a side note, his actor has the same birthday date (minus year) as me</div>
+</div>
+
+<div class="characterbx entry tthree male hred eblack shorter" style="background-image:url('https://i.imgur.com/BLEnEVf.jpg')">
+<div class="namebx"><b>Andy Larkin</b> (What's With Andy?)</div>
+<div class="heartbx">💚</div>
+<div class="descbx"><b>2001</b><br><br>Either I was crushing on him bc I liked a guy called Andy irl or I liked the irl guy because I was crushing on him, I'm not so sure anymore. Either way, I really liked him and my older cousin still teases me for having worn my sunglasses on the edge of my shirt all the time bc of Andy to this day</div>
+</div>
+
+<div class="characterbx entry tfour male hwhite eblack shortest" style="background-image:url('https://i.imgur.com/kBgSkD4.jpg')">
+<div class="namebx"><b>Louie Duck</b> (Quack Pack)</div>
+<div class="heartbx">💙</div>
+<div class="descbx"><b>2001</b><br><br>I don't even remember much about my crush on him except that I liked him a bunch and told my best friend about it while we were chilling on my aunt's bed (they lived in the same apartment complex). The Ducktales remake Louie reminds me a lot of him, btw. Fond memories lmao</div>
+</div>
+
+<div class="characterbx entry tthree male hbrown eblack shortest" style="background-image:url('https://i.imgur.com/xwMWOhR.jpg')">
+<div class="namebx"><b>Dodger</b> (Oliver and Company)</div>
+<div class="heartbx">💚</div>
+<div class="descbx"><b>2001</b><br><br>Another one of those Disney animals that were super common for kids to have a crush on. I loved this movie SO much and Dodger was such a cool dude fr</div>
+</div>
+
+<div class="characterbx entry ttwo male elightgreen shortest" style="background-image:url('https://i.imgur.com/FLHYQks.jpg')">
+<div class="namebx"><b>Randall Boggs</b> (Monsters Inc)</div>
+<div class="heartbx">💛</div>
+<div class="descbx"><b>2001</b><br><br>I remember having a Randall plushie as a kid and I LOVED IT SO MUCH, I honestly don't know why we ever gave it away? In 2013 I briefly had a crush on him again (Monsters University came out), selfshipping included, but somehow that died down pretty quickly</div>
+</div>
+
+<div class="characterbx entry tfour male hbrown egreen shortest" style="background-image:url('https://i.imgur.com/Tn4kSpw.jpg')">
+<div class="namebx"><b>Kovu</b> (The Lion King II)</div>
+<div class="heartbx">💙</div>
+<div class="descbx"><b>2001</b><br><br>Honestly most male-attracted girls I know had a crush on him. Like I hardly know anyone who didn't. I really don't know what it is with Disney and their talking animals</div>
+</div>
+
+<div class="characterbx entry tfour female hblonde elightblue same" style="background-image:url('https://i.imgur.com/AzqgtXy.jpg')">
+<div class="namebx"><b>Harley Quinn</b> (Batman: TAS)</div>
+<div class="heartbx">💙</div>
+<div class="descbx"><b>2000</b><br><br>This crush is always so funny to me because back then I didn't quite understand that girls can like girls as well, but I remember being obsessed with her and always wanting her to come with me to get away from that abusive ass of a clown</div>
+</div>
+
+<div class="characterbx entry tfive male hblonde eblack shorter" style="background-image:url('https://i.imgur.com/lOIyM9h.jpg')">
+<div class="namebx"><b>Norman</b> (Norman Normal)</div>
+<div class="heartbx">💜</div>
+<div class="descbx"><b>2000</b><br><br>I wasn't sure if I should include him because I only had a crush on him for like... a day or two, but crush is crush I guess</div>
+</div>
+
+<div class="characterbx entry tfour male horange eorange tallest" style="background-image:url('https://i.imgur.com/dRZI8Jh.jpg')">
+<div class="namebx"><b>Bowser</b> (Super Mario 64)</div>
+<div class="heartbx">💙</div>
+<div class="descbx"><b>2000</b><br><br>When I had a crush on him I'd just enter his first boss level on N64 and listen to the music while imagining I was in his lair. ...I was 5, don't judge me</div>
+</div>
+
+<div class="characterbx entry tfour male hblack elightgreen shortest" style="background-image:url('https://i.imgur.com/F8GWvve.jpg')">
+<div class="namebx"><b>Scar</b> (The Lion King)</div>
+<div class="heartbx">💙</div>
+<div class="descbx"><b>1999</b><br><br>Didn't *everyone* have a crush on Scar during one point of their life? Sure feels like it, at least.</div>
+</div>
+
+<div class="characterbx entry tone male eblack tallest" style="background-image:url('https://i.imgur.com/FNg79Px.jpg')">
+<div class="namebx"><b>Newton</b> (Ned's Newt)</div>
+<div class="heartbx">❤️</div>
+<div class="starbx">⭐ </div>
+<div class="descbx"><b>1999</b><br><br>Yes, the newt. Yes, I am serious. I loved that character so much I cut out a tiny picture of him from a tv magazine and carried it with me in a pink, heart-shaped plush pouch. My ENTIRE family knew about him and my cousin constantly teased me about it. And the worst thing is I start crushing on him again every once in a while.</div>
+</div>
+
+<div class="characterbx entry tfive male hblonde eblack shortest" style="background-image:url('https://i.imgur.com/RGNug0K.jpg')">
+<div class="namebx"><b>Marsupilami</b> (Disney's Marsupilami)</div>
+<div class="heartbx">💜</div>
+<div class="descbx"><b>1999</b><br><br>The 1993 Disney version! NOT the ridiculous 2000 Marathon Media one. I hated that one beyond human comprehension.</div>
+</div>
+
+<div class="characterbx entry tfour male eyellow tallest" style="background-image:url('https://i.imgur.com/ybBOoCC.jpg')">
+<div class="namebx"><b>Zordrak</b> (The Dreamstone)</div>
+<div class="heartbx">💙</div>
+<div class="descbx"><b>1999</b><br><br>I couldn't watch that show very often because we didn't have the channel it was airing on at home, but I remember seeing it at my great aunt's place a few times and then proudly proclaiming I'm his girlfriend/wife in kindergarten.</div>
+</div>
+
+<div class="characterbx entry tthree male eblack shortest" style="background-image:url('https://i.imgur.com/mSUWW9U.jpg')">
+<div class="namebx"><b>Twipsy</b> (Twipsy)</div>
+<div class="heartbx">💚</div>
+<div class="descbx"><b>1999</b><br><br>He was the first character crush I ever had (as far as I can remember, at least). There's only two distinct memories I still have regarding Twipsy, with one of them being the IMMENSE jealousy I felt when I saw a kid who had a cap of him during a kindergarten field trip to a farm.</div>
+</div>
+
+<div id="testfield" style="display:none;"></div>
+<div id="testfield2" style="display:none;"></div>
+
+<script>
+var btns = document.getElementsByClassName('btn');
+
+for (var b = 0; b < btns.length; b++) {
+btns[b].addEventListener('click', function addCheck(e) {
+if(e.target.classList.contains("actve")) {} else {
+document.getElementById("testfield2").innerHTML = e.target.parentElement.id;
+for (var d = 0; d < btns.length; d++) {
+var idCheck = document.getElementById("testfield2").innerHTML;
+document.getElementById(idCheck).getElementsByClassName('btn')[d].classList.remove("actve");}}
+});
+}
+
+var wrapper = document.getElementById('filter');
+for (var b = 0; b < btns.length; b++) {
+btns[b].addEventListener('click', function(e) {
+if (e.target.classList.contains("actve")) {e.target.classList.remove("actve");}
+else {e.target.classList.add("actve");}
+});
+}
+
+wrapper.addEventListener("click", function() {
+document.getElementById("testfield").innerHTML="";
+var ele = document.getElementsByClassName("actve");
+var entry = document.getElementsByClassName("entry");
+if (ele.length==0) {for (var c = 0; c < entry.length; c++ ) {entry[c].style.display = "block";}} else {
+for (var i = 0; i < ele.length; i++ ) {
+document.getElementById("testfield").innerHTML+="."+ele[i].id;
+var getId = document.getElementById("testfield").innerHTML;
+for (var c = 0; c < entry.length; c++ ) {
+if (entry[c].matches(getId)) {entry[c].style.display = "block";} else {entry[c].style.display = "none";}}
+}
+}});
+</script>
